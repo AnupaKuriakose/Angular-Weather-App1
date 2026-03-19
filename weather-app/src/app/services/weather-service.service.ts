@@ -44,6 +44,7 @@ export class WeatherService {
               };
               const foreCast: ForeCast = daily.time.slice(1, 5).map((date: string, i: number) => ({
                 day: days[new Date(date).getDay()],
+                date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
                 maxTemp: Math.round(daily.temperature_2m_max[i + 1]),
                 minTemp: Math.round(daily.temperature_2m_min[i + 1]),
                 condition: getWeatherDetail(daily.weathercode[i+1]).description,

@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { WeatherService } from '../../services/weather-service.service';
+import {  WeatherStateService } from '../../services/weather-state.service';
 
 @Component({
   selector: 'app-search',
@@ -21,21 +22,18 @@ import { WeatherService } from '../../services/weather-service.service';
 export class Search {
   searchCity = new FormControl();
   weatherService = inject(WeatherService);
-  @Output() weatherDataEvent = new EventEmitter<any>();
-  loading = false;
+  state = inject(WeatherStateService)
+ 
   search() {
-    this.loading = true;
     const city = this.searchCity.value;
     if (city) {
+      this.state.setLoading();
       this.weatherService.getWeatherByCity(city).subscribe({
         next: (result) => {
-          console.log('result', result)
-          this.weatherDataEvent.emit(result)},
-        error: (err) => {
-          console.log(err);
+          this.state.setData(result);
         },
-        complete: () => {
-          this.loading = false;
+        error: () => {
+          this.state.setError("City not found");
         },
       });
     }

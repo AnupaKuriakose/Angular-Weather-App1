@@ -2,13 +2,33 @@
     max-width: 1100px;
     margin: 0 auto;
     min-height: 750px;
-  }
-  *{
+}
+
+* {
     box-sizing: border-box;
-  }
-  .wrapper{
+}
+
+.wrapper {
     min-height: 100vh;
     background: linear-gradient(135deg, #1a1a2e 0%, 316213e 50%, #0f3460 100%);
     padding: 32px 20px;
 
-  }
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    /* Stack them vertically */
+    align-items: center;
+    /* Center horizontally */
+    justify-content: center;
+    gap: 12px;
+    /* Space between spinner and text */
+    margin: 20px;
+}
+
+.loading-text {
+    font-family: sans-serif;
+    color: #f9f9f9;
+    margin: 0;
+}

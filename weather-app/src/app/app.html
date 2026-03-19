@@ -1,11 +1,22 @@
 <div class="wrapper">
-<app-header></app-header>
-<div class="content" role="main">
-<app-search (weatherDataEvent)="weatherData($event)"></app-search>
-@if(){
-<div></div>
-}
-<app-weather-card [weather] ="data"></app-weather-card>
+  <app-header></app-header>
+  <div class="content" role="main">
+    <app-search></app-search>
+    @if (state.loading()) {
+      <div class="loading-container">
+  <mat-progress-spinner 
+    color="accent" 
+    [diameter]="40" 
+    [strokeWidth]="5"
+    mode="indeterminate">
+  </mat-progress-spinner>
+  <p class="loading-text">Fetching weather...</p>
 </div>
-<app-footer></app-footer>
+    }
+     <!-- Card only shows when data is ready -->
+    @if(state.hasData()){
+    <app-weather-card [weather]="state.weatherData()"></app-weather-card>
+    }
+  </div>
+  <app-footer></app-footer>
 </div>

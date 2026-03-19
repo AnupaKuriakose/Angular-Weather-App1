@@ -1,4 +1,3 @@
-import { NumberLiteralType } from 'typescript';
 
 export interface Weather {
   city: string;
@@ -13,6 +12,7 @@ export interface Weather {
 
 export interface ForeCast {
   day: string;
+  date: string;
   maxTemp: number;
   minTemp: number;
   condition: string;

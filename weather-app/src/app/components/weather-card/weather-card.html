@@ -1,9 +1,27 @@
-@if(weather()){
-<mat-card class="example-card" appearance="outlined">
-     <mat-card-header>
-    
-    <mat-card-title>{{weather()?.weather?.city}}, {{weather()?.weather?.country}}</mat-card-title>
-   
-  </mat-card-header>
-</mat-card>
-}
+  <!-- Main Big Card -->
+  <mat-card class="main-card" appearance="outlined">
+ 
+<!-- City & Country -->
+    <div class="city-header">
+      <div class="city-name">{{ weather()?.weather?.city }}</div>
+      <div class="country-name">{{ weather()?.weather?.country }}</div>
+    </div>
+<!-- Temperature + Icon -->
+    <div class="temp-row">
+      <div class="temp-left">
+        <div class="temperature">
+          {{ temperature() }}°{{ isCelsius() ? 'C' : 'F' }}
+        </div>
+        <div class="condition">{{ weather()?.weather?.condition }}</div>
+      </div>
+      <div class="temp-right">
+        <mat-icon class="weather-icon">{{ weather()?.weather?.icon }}</mat-icon>
+      </div>
+    </div>
+    <!-- Toggle Button -->
+    <button mat-stroked-button class="toggle-btn" (click)="toggleUnit()">
+      Switch to °{{ isCelsius() ? 'F' : 'C' }}
+    </button>
+
+
+    </mat-card>
