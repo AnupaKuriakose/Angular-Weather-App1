@@ -1,0 +1,8 @@
+<div class="search-container">
+  <!-- <input type="text" placeholder="Enter city here..." [formControl] ="searchCity"/> -->
+  <mat-form-field appearance="outline">
+    <!-- No <mat-label> here -->
+    <input matInput placeholder="Search..." [formControl]="searchCity" />
+  </mat-form-field>
+  <button matButton="filled" (click)="search()" aria-label="Search city">Search</button>
+</div>

@@ -1,0 +1,9 @@
+@if(weather()){
+<mat-card class="example-card" appearance="outlined">
+     <mat-card-header>
+    
+    <mat-card-title>{{weather()?.weather?.city}}, {{weather()?.weather?.country}}</mat-card-title>
+   
+  </mat-card-header>
+</mat-card>
+}

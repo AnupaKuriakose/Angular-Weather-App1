@@ -1,0 +1,20 @@
+.title{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    padding: 12px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px blue;
+}
+
+.icon{
+    height:30px;
+    width: 30px;
+}
+.header{
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: lightcyan;
+}
