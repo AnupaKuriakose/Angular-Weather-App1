@@ -16,7 +16,7 @@ export class WeatherService {
     return this.getCoOrdinates(city).pipe(
       switchMap((geoData) => {
         const location = geoData.results?.[0];
-        if (!location) throw new Error('City data not found');
+        if (!location || (!location.latitude && !location.longitude)) throw new Error('No Results found for the searched city!');
 
         const { latitude, longitude, name, country } = location;
         return this.http
@@ -43,8 +43,6 @@ export class WeatherService {
                 icon: weatherDeatil.icon,
                 visibility: Math.round(current.visibility),
               };
-              console.log(daily.time)
-              console.timeLog(daily.time.slice(1, 5))
               const forecast: ForeCast = daily.time.slice(0, 5).map((date: string, i: number) => {
                 const localDate =  new Date(date.replace(/-/g, '/')); 
                 return {
@@ -54,6 +52,7 @@ export class WeatherService {
                 minTemp: Math.round(daily.temperature_2m_min[i]),
                 condition: getWeatherDetail(daily.weathercode[i]).description,
                 icon: getWeatherDetail(daily.weathercode[i]).icon
+                
               }});
               console.log('weather', forecast);
               return {weather, forecast};

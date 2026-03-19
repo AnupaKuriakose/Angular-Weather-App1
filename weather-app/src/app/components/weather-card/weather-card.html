@@ -1,86 +1,79 @@
-  <!-- Main Big Card -->
-  <mat-card class="main-card" appearance="outlined">
- 
-<!-- City & Country -->
-    <div class="city-header">
-      <div class="city-name">{{ weather()?.weather?.city }}</div>
-      <div class="country-name">{{ weather()?.weather?.country }}</div>
+<!-- Main Big Card -->
+<mat-card class="main-card" appearance="outlined">
+  <!-- City & Country -->
+  <div class="city-header">
+    <div class="city-name">{{ weather()?.weather?.city }}</div>
+    <div class="country-name">{{ weather()?.weather?.country }}</div>
+  </div>
+  <!-- Temperature + Icon -->
+  <div class="temp-row">
+    <div class="temp-left">
+      <div class="temperature">{{ temperature() }}°{{ isCelsius() ? 'C' : 'F' }}</div>
+      <div class="condition">{{ weather()?.weather?.condition }}</div>
     </div>
-<!-- Temperature + Icon -->
-    <div class="temp-row">
-      <div class="temp-left">
-        <div class="temperature">
-          {{ temperature() }}°{{ isCelsius() ? 'C' : 'F' }}
-        </div>
-        <div class="condition">{{ weather()?.weather?.condition }}</div>
-      </div>
-      <div class="temp-right">
-        <mat-icon class="weather-icon">{{ weather()?.weather?.icon }}</mat-icon>
-      </div>
-    </div>
-    <!-- Toggle Button -->
-    <button mat-stroked-button class="toggle-btn" (click)="toggleUnit()">
-      Switch to °{{ isCelsius() ? 'F' : 'C' }}
-    </button>
-
-
-       <!-- Detail Cards Grid -->
-    <div class="detail-grid">
-
-      <mat-card class="detail-card">
-        <div class="detail-label">
-          <mat-icon>thermostat</mat-icon>
-          Feels Like
-        </div>
-        <div class="detail-value">
-          {{ feelsLike() }}°{{ isCelsius() ? 'C' : 'F' }}
-        </div>
-        <div class="detail-unit">Apparent temp</div>
-      </mat-card>
-
-      <mat-card class="detail-card">
-        <div class="detail-label">
-          <mat-icon>water_drop</mat-icon>
-          Humidity
-        </div>
-        <div class="detail-value">{{ weather()?.weather?.humidity }}%</div>
-        <div class="detail-unit">Relative humidity</div>
-      </mat-card>
-
-      <mat-card class="detail-card">
-        <div class="detail-label">
-          <mat-icon>air</mat-icon>
-          Wind Speed
-        </div>
-        <div class="detail-value">{{ weather()?.weather?.windSpeed }} km/h</div>
-        <div class="detail-unit">Surface wind</div>
-      </mat-card>
-
-      <mat-card class="detail-card">
-        <div class="detail-label">
-          <mat-icon>visibility</mat-icon>
-          Visibility
-        </div>
-        <div class="detail-value">{{ weather()?.weather?.visibility }} km</div>
-        <div class="detail-unit">Clear view</div>
-      </mat-card>
-
-    </div>
-
-  </mat-card>
-
-   <!-- Forecast Section -->
-  <div class="forecast-section">
-    <div class="forecast-title">5-Day Forecast</div>
-    <div class="forecast-scroll">
-      @for(day of weather()?.forecast; track day.day; let i = $index){
-        <div class="forecast-card" [class.today]="i === 0">
-          <div class="forecast-day">{{ i === 0 ? 'Today' : day.day }}</div>
-          <div class="forecast-date">{{ day.date }}</div>
-          <mat-icon class="forecast-icon">{{ day.icon }}</mat-icon>
-          <div> Max : <span class="forecast-max">{{ day.maxTemp }}°</span></div>
-          <div class="forecast-min"> Min : {{ day.minTemp }}°</div>
-        </div>
-      }
+    <div class="temp-right">
+      <mat-icon class="weather-icon">{{ weather()?.weather?.icon }}</mat-icon>
     </div>
   </div>
+  <!-- Toggle Button -->
+  <button mat-stroked-button class="toggle-btn" (click)="toggleUnit()">
+    Switch to °{{ isCelsius() ? 'F' : 'C' }}
+  </button>
+
+  <!-- Detail Cards Grid -->
+  <div class="detail-grid">
+    <mat-card class="detail-card">
+      <div class="detail-label">
+        <mat-icon>thermostat</mat-icon>
+        Feels Like
+      </div>
+      <div class="detail-value">{{ feelsLike() }}°{{ isCelsius() ? 'C' : 'F' }}</div>
+      <div class="detail-unit">Apparent temp</div>
+    </mat-card>
+
+    <mat-card class="detail-card">
+      <div class="detail-label">
+        <mat-icon>water_drop</mat-icon>
+        Humidity
+      </div>
+      <div class="detail-value">{{ weather()?.weather?.humidity }}%</div>
+      <div class="detail-unit">Relative humidity</div>
+    </mat-card>
+
+    <mat-card class="detail-card">
+      <div class="detail-label">
+        <mat-icon>air</mat-icon>
+        Wind Speed
+      </div>
+      <div class="detail-value">{{ weather()?.weather?.windSpeed }} km/h</div>
+      <div class="detail-unit">Surface wind</div>
+    </mat-card>
+
+    <mat-card class="detail-card">
+      <div class="detail-label">
+        <mat-icon>visibility</mat-icon>
+        Visibility
+      </div>
+      <div class="detail-value">{{ weather()?.weather?.visibility }} km</div>
+      <div class="detail-unit">Clear view</div>
+    </mat-card>
+  </div>
+</mat-card>
+
+<!-- Forecast Section -->
+<div class="forecast-section">
+  <div class="forecast-title">5-Day Forecast</div>
+  <div class="forecast-scroll">
+    @for (day of weather()?.forecast; track day.day; let i = $index) {
+      <div class="forecast-card" [class.today]="i === 0">
+        <div class="forecast-day">{{ i === 0 ? 'Today' : day.day }}</div>
+        <div class="forecast-date">{{ day.date }}</div>
+        <mat-icon class="forecast-icon">{{ day.icon }}</mat-icon>
+        <div class="forecast-min">
+          Max : <span class="forecast-max">{{ day.maxTemp }}°</span>
+        </div>
+        <div class="forecast-min">Min : {{ day.minTemp }}°</div>
+      </div>
+    }
+  </div>
+</div>

@@ -4,18 +4,36 @@
     gap: 2rem;
     margin-top: 60px;
 }
+.input-wrapper {
+    display: flex;
+    flex-direction: column; /* This makes errors go BELOW the input */
+    flex: 1;
+}
 button{
    height: 50px;
    background-color:rgba(255,255,255,0.08) !important;
+   cursor: pointer;
+   border-color: rgba(255, 255, 255, 0.922);
+}
+.error-text {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin: 4px 0 0 8px; /* Small gap below the input */
 }
 input{
-   flex: 1;
+   width:100%;
    border-radius: 15px;
    height: 50px;
    padding: 6px;
-   background-color: lightcyan !important;
-   border: none;
+   //background-color: lightcyan !important;
+   border-color: rgba(255, 255, 255, 0.50);
    font-size: 16px;
+   background: rgba(255,255,255,0.08);
+   border-radius: 14px;
+   color:white;
+}
+input::placeholder{
+    color: rgba(255, 255, 255, 0.4);
 }
 
 mat-form-field{

@@ -4,19 +4,19 @@
     <app-search></app-search>
     @if (state.loading()) {
       <div class="loading-container">
-  <mat-progress-spinner 
-    color="accent" 
-    [diameter]="40" 
-    [strokeWidth]="5"
-    mode="indeterminate">
-  </mat-progress-spinner>
-  <p class="loading-text">Fetching weather...</p>
-</div>
+        <mat-progress-spinner color="accent" [diameter]="40" [strokeWidth]="5" mode="indeterminate"></mat-progress-spinner>
+        <p class="loading-text">Fetching weather...</p>
+      </div>
     }
-     <!-- Card only shows when data is ready -->
-    @if(state.hasData()){
-    <app-weather-card [weather]="state.weatherData()"></app-weather-card>
+    <!-- Card only shows when data is ready -->
+    @else if (state.hasData()) {
+      <app-weather-card [weather]="state.weatherData()"></app-weather-card>
     }
+     
+    @else if (state.error()) {
+      <p class="error-text"> {{state.error()}}</p>
+    }
+  
   </div>
   <app-footer></app-footer>
 </div>

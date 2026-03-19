@@ -1,8 +1,27 @@
 <div class="search-container">
-  <input type="text" placeholder="Enter city here..." [formControl] ="searchCity"/>
-  <!-- <mat-form-field appearance="outline">
-     No <mat-label> here 
-    <input matInput placeholder="Search..." [formControl]="searchCity" />
-  </mat-form-field> -->
-  <button matButton="filled" (click)="search()" aria-label="Search city">Search</button>
+  <div class="input-wrapper">
+    <input type="text" placeholder="Enter city here..." [formControl]="searchCity" />
+    <div class="error-messages">
+      @if (cityErrors && searchCity.hasError('required')) {
+        <p class="error-text">City is required</p>
+      }
+      @if (cityErrors && searchCity.hasError('minlength')) {
+        <p class="error-text">Min 2 characters required</p>
+      }
+      @if (cityErrors && searchCity.hasError('pattern')) {
+        <p class="error-text">Special characters not allowed</p>
+      }
+      @if (cityErrors && searchCity.hasError('whitespace')) {
+        <p class="error-text">Cannot be only spaces</p>
+      }
+    </div>
+  </div>
+  <button
+    matButton="filled"
+    (click)="search()"
+    aria-label="Search city"
+    [disabled]="cityErrors"
+  >
+    Search
+  </button>
 </div>
