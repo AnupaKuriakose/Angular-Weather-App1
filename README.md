@@ -1,6 +1,6 @@
 # 🌤️ Angular Weather App
 
-A modern, responsive weather application built with Angular 18+ that provides real-time weather data and 4-day forecasts for any city in the world.
+A modern, responsive weather application built with Angular 21 that provides real-time weather data and 4-day forecasts for any city in the world.
 
 ## 📸 Screenshots
 <img width="956" height="418" alt="image" src="https://github.com/user-attachments/assets/e286c998-60f9-4418-8ec4-6975ad4424e1" />
