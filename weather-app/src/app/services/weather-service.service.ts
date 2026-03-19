@@ -22,7 +22,7 @@ export class WeatherService {
         return this.http
           .get<any>(
             `${this.foreCastUrl}?latitude=${latitude}&longitude=${longitude}` +
-              `&current=temperature_2m,wind_speed_10m,relative_humidity_2m,wind_speed_10m,weathercode` +
+              `&current=temperature_2m,wind_speed_10m,relative_humidity_2m,wind_speed_10m,weathercode,visibility` +
               `&daily=temperature_2m_max,temperature_2m_min,weathercode` +
               `&timezone=auto`,
           )
@@ -41,16 +41,22 @@ export class WeatherService {
                 humidity: current.relative_humidity_2m,
                 windSpeed: Math.round(current.wind_speed_10m),
                 icon: weatherDeatil.icon,
+                visibility: Math.round(current.visibility),
               };
-              const foreCast: ForeCast = daily.time.slice(1, 5).map((date: string, i: number) => ({
-                day: days[new Date(date).getDay()],
-                date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-                maxTemp: Math.round(daily.temperature_2m_max[i + 1]),
-                minTemp: Math.round(daily.temperature_2m_min[i + 1]),
-                condition: getWeatherDetail(daily.weathercode[i+1]).description,
-                icon: getWeatherDetail(daily.weathercode[i+1]).icon
-              }));
-              return {weather, foreCast};
+              console.log(daily.time)
+              console.timeLog(daily.time.slice(1, 5))
+              const forecast: ForeCast = daily.time.slice(0, 5).map((date: string, i: number) => {
+                const localDate =  new Date(date.replace(/-/g, '/')); 
+                return {
+                day: days[localDate.getDay()],
+                date: localDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                maxTemp: Math.round(daily.temperature_2m_max[i]),
+                minTemp: Math.round(daily.temperature_2m_min[i]),
+                condition: getWeatherDetail(daily.weathercode[i]).description,
+                icon: getWeatherDetail(daily.weathercode[i]).icon
+              }});
+              console.log('weather', forecast);
+              return {weather, forecast};
             }),
           );
       }),

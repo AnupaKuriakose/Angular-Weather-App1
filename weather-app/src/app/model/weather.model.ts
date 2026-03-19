@@ -8,6 +8,7 @@ export interface Weather {
   humidity: number;
   windSpeed: number;
   icon: string;
+  visibility: number;
 }
 
 export interface ForeCast {

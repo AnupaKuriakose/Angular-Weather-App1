@@ -1,10 +1,11 @@
 import { Component, computed, effect, input, OnInit, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-weather-card',
-  imports: [MatCardModule, MatIconModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule],
   templateUrl: './weather-card.html',
   styleUrl: './weather-card.scss',
 })
@@ -21,6 +22,7 @@ export class WeatherCard {
     const feels = this.weather()?.weather?.feelsLike;
     return this.isCelsius() ? feels : Math.round((feels * 9) / 5 + 32);
   });
+  
   toggleUnit() {
     this.isCelsius.update((v) => !v);
   }

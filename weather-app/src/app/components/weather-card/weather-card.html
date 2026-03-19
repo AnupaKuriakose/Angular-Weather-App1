@@ -24,4 +24,63 @@
     </button>
 
 
-    </mat-card>
+       <!-- Detail Cards Grid -->
+    <div class="detail-grid">
+
+      <mat-card class="detail-card">
+        <div class="detail-label">
+          <mat-icon>thermostat</mat-icon>
+          Feels Like
+        </div>
+        <div class="detail-value">
+          {{ feelsLike() }}°{{ isCelsius() ? 'C' : 'F' }}
+        </div>
+        <div class="detail-unit">Apparent temp</div>
+      </mat-card>
+
+      <mat-card class="detail-card">
+        <div class="detail-label">
+          <mat-icon>water_drop</mat-icon>
+          Humidity
+        </div>
+        <div class="detail-value">{{ weather()?.weather?.humidity }}%</div>
+        <div class="detail-unit">Relative humidity</div>
+      </mat-card>
+
+      <mat-card class="detail-card">
+        <div class="detail-label">
+          <mat-icon>air</mat-icon>
+          Wind Speed
+        </div>
+        <div class="detail-value">{{ weather()?.weather?.windSpeed }} km/h</div>
+        <div class="detail-unit">Surface wind</div>
+      </mat-card>
+
+      <mat-card class="detail-card">
+        <div class="detail-label">
+          <mat-icon>visibility</mat-icon>
+          Visibility
+        </div>
+        <div class="detail-value">{{ weather()?.weather?.visibility }} km</div>
+        <div class="detail-unit">Clear view</div>
+      </mat-card>
+
+    </div>
+
+  </mat-card>
+
+   <!-- Forecast Section -->
+  <div class="forecast-section">
+    <div class="forecast-title">5-Day Forecast</div>
+    <div class="forecast-scroll">
+      @for(day of weather()?.forecast; track day.day; let i = $index){
+        <div class="forecast-card" [class.today]="i === 0">
+          <div class="forecast-day">{{ i === 0 ? 'Today' : day.day }}</div>
+          <div class="forecast-date">{{ day.date }}</div>
+          <mat-icon class="forecast-icon">{{ day.icon }}</mat-icon>
+          <div> Max : <span class="forecast-max">{{ day.maxTemp }}°</span></div>
+          <div class="forecast-min"> Min : {{ day.minTemp }}°</div>
+        </div>
+      }
+    </div>
+  </div>
