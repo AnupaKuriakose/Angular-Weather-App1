@@ -1,12 +1,12 @@
 <div class="search-container">
   <div class="input-wrapper">
-    <input type="text" placeholder="Enter city here..." [formControl]="searchCity" />
+    <input type="text" placeholder="Enter city here..." [formControl]="searchCity" (keyup.enter)="search()" />
     <div class="error-messages">
       @if (cityErrors && searchCity.hasError('required')) {
         <p class="error-text">City is required</p>
       }
       @if (cityErrors && searchCity.hasError('minlength')) {
-        <p class="error-text">Min 2 characters required</p>
+        <p class="error-text">Min 3 characters required</p>
       }
       @if (cityErrors && searchCity.hasError('pattern')) {
         <p class="error-text">Special characters not allowed</p>
@@ -23,5 +23,13 @@
     [disabled]="cityErrors"
   >
     Search
+  </button>
+  <button
+    matButton="filled"
+    (click)="search()"
+    aria-label="Search city"
+    [disabled]="cityErrors"
+  >
+    Clear
   </button>
 </div>
